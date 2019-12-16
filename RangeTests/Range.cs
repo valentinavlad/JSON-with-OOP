@@ -15,16 +15,6 @@ namespace RangeTests
             this.end = end;
         }
 
-      /*  public bool Match(string text)
-        {
-            if (string.IsNullOrEmpty(text))
-            {
-                return false;
-            }
-
-            return text[0] >= start && text[0] <= end;
-        }*/
-
         public IMatch Match(string text)
         {
             return !string.IsNullOrEmpty(text) && 
