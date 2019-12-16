@@ -12,23 +12,23 @@ namespace RangeTests
             this.patterns = patterns;
         }
 
-        public IMatch Match(string text)
+        public IMatch Match(string textToBeConsumed)
         {
-            string txt = text;
+            string textUnConsumed = textToBeConsumed;
             foreach (var pattern in patterns)
             {
-                var match = pattern.Match(text);
+                var match = pattern.Match(textToBeConsumed);
 
                 if (!match.Success())
                 {
-                    return (IMatch)new FailedMatch(txt);
+                    return new FailedMatch(textUnConsumed);
                 }
-     
-                text = match.RemainingText();
+
+                textToBeConsumed = match.RemainingText();
 
             }
             
-            return new SuccessMatch(text);
+            return new SuccessMatch(textToBeConsumed);
         }
     }
 }

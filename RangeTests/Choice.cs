@@ -17,12 +17,15 @@ namespace RangeTests
         {
             foreach (var pattern in patterns)
             {
-                if (pattern.Match(text).Success())
+                var match = pattern.Match(text);
+
+                if (match.Success())
                 {
-                    return new SuccessMatch(text.Substring(1));
+                    return match;
                 }
             }
-            return (IMatch)new FailedMatch(text);
+
+            return new FailedMatch(text);
         }
     }
 }

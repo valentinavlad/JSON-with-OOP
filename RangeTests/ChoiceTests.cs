@@ -64,6 +64,23 @@ namespace RangeTests
             Assert.Equal("12", hex.Match("012").RemainingText());
 
         }
+
+        [Theory]
+        [InlineData("ab3")]
+
+        public void CheckIfTextIsConsumedShouldReturnTrue(string input)
+        {
+           Sequence ab = new Sequence(
+                         new Character('a'),
+                         new Character('b'));
+            var seq = new Choice(
+                           ab,
+                           new Choice(
+                                new Range('1', '5')
+                            ));
+            Assert.True(seq.Match(input).Success());
+            Assert.Equal("3", seq.Match("ab3").RemainingText());
+        }
     }
     
 }
