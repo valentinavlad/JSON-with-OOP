@@ -20,15 +20,9 @@ namespace RangeTests
                 return new FailedMatch(text);
             }
 
-            for (int i = 0; i < accepted.Length; i++)
-            {
-                if (text[0] == accepted[i])
-                {
-                    return new SuccessMatch(text.Substring(1));
-                }
-            }
-
-            return new FailedMatch(text);
+            return accepted.Contains(text[0]) 
+                ? new SuccessMatch(text.Substring(1)) 
+                : (IMatch)new FailedMatch(text);
         }
     }
 }

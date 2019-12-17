@@ -14,11 +14,12 @@ namespace RangeTests
 
         public IMatch Match(string text)
         {
-            return string.IsNullOrEmpty(text)
-                ? new FailedMatch(text)
-                : text.StartsWith(prefix) 
-                ? new SuccessMatch(text.Substring(prefix.Length)) 
-                : (IMatch)new FailedMatch(text);
+            if (string.IsNullOrEmpty(text))
+            {
+                return new FailedMatch(text);
+            }
+
+            return text.StartsWith(prefix) ? new SuccessMatch(text.Substring(prefix.Length)) : (IMatch)new FailedMatch(text);
         }
     }
 }
