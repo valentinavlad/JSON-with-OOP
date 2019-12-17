@@ -4,23 +4,21 @@ using System.Text;
 
 namespace RangeTests
 {
-    class Optional
+    class Optional : IPattern
     {
-        IPattern pattern;
+        private readonly IPattern pattern;
         public Optional(IPattern pattern)
         {
             this.pattern = pattern;
         }
 
-        public IMatch Match(string textToBeConsumed)
+        public IMatch Match(string text)
         {
-            string textUnConsumed = textToBeConsumed;
-            var match = pattern.Match(textToBeConsumed);
-            textToBeConsumed = match.RemainingText();
+            var match = pattern.Match(text);
 
-            return !match.Success() 
-                   ? new SuccessMatch(textUnConsumed) 
-                   : match;
+            return match.Success() 
+                   ? match 
+                   : new SuccessMatch(text);
         }
     }
 }

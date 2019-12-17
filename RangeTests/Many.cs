@@ -6,27 +6,21 @@ namespace RangeTests
 {
     class Many : IPattern
     {
-        IPattern pattern;
+        private readonly IPattern pattern;
         public Many(IPattern pattern)
         {
             this.pattern = pattern;
         }
 
-        public IMatch Match(string textToBeConsumed)
+        public IMatch Match(string text)
         {
-            string textUnConsumed = textToBeConsumed;
-            var match = pattern.Match(textToBeConsumed);
+            var match = pattern.Match(text);
             while (match.Success())
             {
-                textToBeConsumed = match.RemainingText();
-                match = pattern.Match(textToBeConsumed);
-                if (!match.Success())
-                {
-                    return new SuccessMatch(textToBeConsumed);
-                }
+                match = pattern.Match(match.RemainingText());
             }
            
-            return new SuccessMatch(textToBeConsumed);
+            return new SuccessMatch(match.RemainingText());
         }
     }
 }

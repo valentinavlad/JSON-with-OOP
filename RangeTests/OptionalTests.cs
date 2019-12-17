@@ -7,13 +7,6 @@ namespace RangeTests
 {
     public class OptionalTests
     {
-        /*var a = new Optional(new Character('a'));
-        a.Match("abc"); // true / "bc"
-        a.Match("aabc"); // true / "abc"
-        a.Match("bc"); // true / "bc"
-        a.Match(""); // true / ""
-        a.Match(null); // true / null*/
-
         [Theory]
         [InlineData("abc")]
         [InlineData("aabc")]
