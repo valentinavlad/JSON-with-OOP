@@ -25,7 +25,6 @@ namespace RangeTests
                 }
 
                 textToBeConsumed = match.RemainingText();
-
             }
             
             return new SuccessMatch(textToBeConsumed);

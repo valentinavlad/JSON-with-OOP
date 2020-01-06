@@ -7,14 +7,6 @@ namespace RangeTests
 {
     public class OneOrMoreTests
     {
-        /*
-        var a = new OneOrMore(new Range('0', '9'));
-        a.Match("123"); // true / ""
-        a.Match("1a"); // true / "a"
-        a.Match("bc"); // false / "bc"
-        a.Match(""); // false / ""
-        a.Match(null); // false / null*/
-
         [Theory]
         [InlineData("123")]
         [InlineData("1a")]
@@ -30,11 +22,12 @@ namespace RangeTests
         public void CheckIfTextIsConsumed2ShouldReturnTrue()
         {
             var a = new OneOrMore(new Range('0', '9'));
-            Assert.Equal("a", a.Match("1a").RemainingText());
+            Assert.True(a.Match("11223a").Success());
+            Assert.Equal("a", a.Match("11223a").RemainingText());
+            Assert.Equal("aaa", a.Match("58aaa").RemainingText());
         }
 
         [Theory]
-  
         [InlineData("bc")]
         [InlineData("")]
         [InlineData(null)]
