@@ -6,7 +6,7 @@ namespace RangeTests
 {
     class Choice : IPattern
     {
-        readonly IPattern[] patterns;
+        IPattern[] patterns;
 
         public Choice(params IPattern[] patterns)
         {
@@ -26,6 +26,12 @@ namespace RangeTests
             }
 
             return new FailedMatch(text);
+        }
+
+        public void Add(IPattern pattern)
+        {
+            Array.Resize(ref patterns, patterns.Length + 1);
+            patterns[^1] = pattern;
         }
     }
 }

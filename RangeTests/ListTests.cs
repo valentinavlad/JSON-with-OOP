@@ -13,7 +13,7 @@ namespace RangeTests
         [InlineData("")] // ""
         [InlineData(null)] // null*/
         [InlineData("1,2,3,")] //,
-        [InlineData(",1")] //,
+        [InlineData(",1")] //,1
 
 
         public void CheckIfPatternsReturnTrue(string input)

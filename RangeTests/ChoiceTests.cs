@@ -70,9 +70,9 @@ namespace RangeTests
 
         public void CheckIfTextIsConsumedShouldReturnTrue(string input)
         {
-           Sequence ab = new Sequence(
-                         new Character('a'),
-                         new Character('b'));
+            Sequence ab = new Sequence(
+                          new Character('a'),
+                          new Character('b'));
             var seq = new Choice(
                            ab,
                            new Choice(
@@ -80,6 +80,20 @@ namespace RangeTests
                             ));
             Assert.True(seq.Match(input).Success());
             Assert.Equal("3", seq.Match("ab3").RemainingText());
+        }
+
+        [Fact]
+
+        public void CheckIfPatternIsAdded()
+        {
+            var input = new Choice(
+                       new Character('a'),
+                       new Character('b'));
+            Assert.True(input.Match("ab").Success());
+            Assert.False(input.Match("c").Success());
+
+            input.Add(new Character('c'));
+            Assert.True(input.Match("c").Success());
         }
     }
     
